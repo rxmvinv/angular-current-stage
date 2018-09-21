@@ -1,0 +1,9 @@
+<h2>Slides</h2>
+<div class="list-box">
+  <ul class="slides">
+      <app-slide  *ngFor="let slide of slides" [slide]="slide"></app-slide>
+      <!--<app-slide  *ngFor="let slide of slides" [slide]="{ $implicit: slide }"></app-slide>-->
+  </ul>
+</div>
+
+<a routerLink="/new-slide">Add New</a>

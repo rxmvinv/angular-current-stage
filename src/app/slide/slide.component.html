@@ -1,0 +1,7 @@
+<li>
+  <img src="{{slide.image}}" alt="image">
+  <span class="badge">{{slide.id}}</span> {{slide.title}}
+  <div>{{slide.description}}</div>
+  <span>Iframe: {{slide.embedded}}</span>
+  <button type="button" name="remove-slide" (click)="onRemove(slide)">remove</button>
+</li>
