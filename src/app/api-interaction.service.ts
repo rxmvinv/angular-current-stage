@@ -5,7 +5,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 //import { HttpClientModule, HttpHeaders } from '@angular/common/http';
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  headers: new HttpHeaders({
+     'Content-Type': 'application/json; charset=utf-8'
+  })
 };
 
 @Injectable({
@@ -14,7 +16,8 @@ const httpOptions = {
 export class ApiInteractionService {
 
   getSlides (): Observable<Slide[]> {
-    return this.http.get<Slide[]>(this.apiUrl)
+    return this.http.get<Slide[]>(this.apiUrl, httpOptions).pipe(
+    )
   }
 
   addSlide (slide: Slide): Observable<Slide> {

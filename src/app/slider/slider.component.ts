@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Slide } from '../slide';
 import { ApiInteractionService } from '../api-interaction.service';
+//import * as $ from 'jquery';
+declare var $:any;
 
 @Component({
   selector: 'app-slider',
@@ -14,6 +16,7 @@ export class SliderComponent implements OnInit {
 
   ngOnInit() {
     this.loadSlides();
+    $('.carousel').carousel({interval: 5000});
   }
   loadSlides(): void {
     this.apiService.getSlides()
