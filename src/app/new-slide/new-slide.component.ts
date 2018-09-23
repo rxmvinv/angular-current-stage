@@ -19,13 +19,14 @@ export class NewSlideComponent implements OnInit {
   */
 
   insertedSlide: FormGroup;
+  validState: String;
 
-  constructor(private fb: FormBuilder, private cd: ChangeDetectorRef, private apiService: ApiInteractionService) { }
+  constructor(private fb: FormBuilder, private cd: ChangeDetectorRef, private apiService: ApiInteractionService, private location: Location) { }
 
   ngOnInit() {
     this.insertedSlide = new FormGroup({
-           title: new FormControl(),
-           description: new FormControl(),
+           title: new FormControl(null, [Validators.required]),
+           description: new FormControl([Validators.required]),
            image: new FormControl([null, Validators.required]),
            embedded: new FormControl()
     });
@@ -71,8 +72,17 @@ export class NewSlideComponent implements OnInit {
     if (!formValue.embedded) {
       formValue.embedded = 'empty';
     }
-    console.log(formValue);
-    this.apiService.addSlide(formValue).subscribe()
+
+    if (formValue.title && formValue.description) {
+      console.log(formValue);
+
+      this.apiService.addSlide(formValue).subscribe()
+      console.log("Form Submitted!");
+      location.replace('/');
+    } else {
+      this.validState = 'Required title and description fields';
+      return;
+    }
   }
 
 }

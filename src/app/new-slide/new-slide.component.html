@@ -1,14 +1,14 @@
-<div class="container">
+<div class="container keyframe-animated">
     <h1>New Slide</h1>
     <form [formGroup]="insertedSlide" (ngSubmit)="onSubmit(insertedSlide.value)">
       <div class="form-group">
         <label for="title">Title:</label>
-        <input type="text" class="form-control" required  (change)="onTitleChange($event)" name="title">
+        <input type="text" class="form-control" required [class.invalid]="validState"  (change)="onTitleChange($event)" name="title">
       </div>
 
       <div class="form-group">
         <label for="description">Description:</label>
-        <input type="text" class="form-control" required  (change)="onDescriptionChange($event)" name="description">
+        <input type="text" class="form-control" required [class.invalid]="validState" (change)="onDescriptionChange($event)" name="description">
       </div>
 
       <div class="form-group">
@@ -20,6 +20,8 @@
         <label for="embedded">Url:</label>
         <input type="text" class="form-control" (change)="onEmbeddedChange($event)" name="embedded">
       </div>
+
+      <div class="form-group" *ngIf="validState">{{validState}}</div>
 
       <button type="submit" class="btn btn-success">Submit</button>
 

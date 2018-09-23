@@ -11,6 +11,7 @@ declare var $:any;
 })
 export class SliderComponent implements OnInit {
   slides: Slide[];
+  message: String;
 
   constructor(private apiService: ApiInteractionService) { }
 
@@ -20,6 +21,12 @@ export class SliderComponent implements OnInit {
   }
   loadSlides(): void {
     this.apiService.getSlides()
-      .subscribe(slides => this.slides = slides);
+      .subscribe(slides => {
+         this.slides = slides;
+         setTimeout(() => {
+           this.message = this.slides.length ? '' : 'There is no slides...';
+           console.log(this.slides);
+         }, 500)
+       })
   }
 }

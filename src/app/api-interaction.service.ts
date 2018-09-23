@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable, ErrorHandler } from '@angular/core';
 import { Slide } from './slide';
 import { Observable, of } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 //import { HttpClientModule, HttpHeaders } from '@angular/common/http';
 
@@ -17,14 +18,21 @@ export class ApiInteractionService {
 
   getSlides (): Observable<Slide[]> {
     return this.http.get<Slide[]>(this.apiUrl, httpOptions).pipe(
+      tap(
+        data => console.log(data),
+        error => console.log(error)
+      )
     )
   }
 
   addSlide (slide: Slide): Observable<Slide> {
-    return this.http.post<Slide>(this.apiUrl, slide, httpOptions).pipe(
-      //console.log(`added slide w/ id=${slide.id}`),
-      //catchError(error => console.log(error))
-    );
+    return this.http.post<Slide>(this.apiUrl, slide, httpOptions)
+    .pipe(
+      tap(
+        data => console.log(data),
+        error => console.log(error)
+      )
+    )
   }
 
   removeSlide (slide: Slide | number): Observable<Slide> {
@@ -32,8 +40,10 @@ export class ApiInteractionService {
       const url = `${this.apiUrl}/${id}`;
 
       return this.http.delete<Slide>(url, httpOptions).pipe(
-        //console.log(`deleted slide id=${id}`),
-        //catchError(console.error(error))
+        tap(
+          data => console.log(data),
+          error => console.log(error)
+        )
       );
   }
 

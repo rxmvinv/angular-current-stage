@@ -4,9 +4,8 @@
     {{slide.title}}
     <div>
       <p>{{slide.description}}</p>
-      <span class="badge">{{slide.id}}</span>
       <span>Iframe: {{slide.embedded}}</span>
-      <button type="button" name="remove-slide" (click)="onRemove(slide)">remove</button>
+      <button type="button" class="btn btn-danger remove-slide" name="remove-slide" (click)="onRemove(slide)">remove</button>
     </div>
   </div>
 </div>
